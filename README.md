@@ -24,7 +24,9 @@ contains all sprites
 
 ## Requires
 lib:pixi.js
-currently using <script src="[https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js](https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js)"></script>
+currently using
+<script src="[https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js](https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js)">
+</script>
 
 ## Methods
 - Create new app PIXI.js line 31
