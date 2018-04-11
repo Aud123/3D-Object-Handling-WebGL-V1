@@ -25,7 +25,7 @@ contains all sprites
 ## Requires
 lib:pixi.js
 currently using
-<script src="[https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js](https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js)">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js">
 </script>
 
 ## Methods
