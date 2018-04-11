@@ -1,0 +1,211 @@
+<html>
+<head>
+	<title>pixi.js example object WebGL/ Aud123 </title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000000;
+
+     border: 1px solid blue;
+     box-sizing: border-box;
+   }
+ </style>
+ <!-- See to update to last version -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.3/pixi.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+  <!-- <script src="pixi.js"></script> -->
+ <meta charset="UTF-8">
+ <link href="http://introjs.com/minified/introjs.min.css">
+</head>
+
+<body>
+ <script>
+  (function()
+  {
+   // your page initialization code here
+   // the DOM will be available here
+
+   var myAnimationOrder = 1;
+   var container = new PIXI.Container();
+   var app = new PIXI.Application();
+   document.body.appendChild(app.view);
+   app.stop();
+
+   app.stage.addChild(container);
+
+   const loader = PIXI.loader
+   .add('spritesheet0', 'data/sprite_0.json')
+   .add('spritesheet1', 'data/sprite_1.json')
+   .add('spritesheet2', 'data/sprite_2.json')
+   .add('spritesheet3', 'data/sprite_3.json')
+   .add('spritesheet4', 'data/sprite_4.json')
+   .add('spritesheet5', 'data/sprite_5.json')
+   .add('spritesheet6', 'data/sprite_6.json')
+   .add('spritesheet7', 'data/sprite_7.json')
+   .add('spritesheet8', 'data/sprite_8.json')
+   .add('spritesheet9', 'data/sprite_9.json')
+   .add('spritesheet10','data/sprite_10.json')
+   .add('spritesheet11','data/sprite_11.json')
+   .add('spritesheet12','data/sprite_12.json')
+   .add('spritesheet13','data/sprite_13.json')
+   .add('spritesheet14','data/sprite_14.json')
+   .add('spritesheet15','data/sprite_15.json')
+   .add('spritesheet16','data/sprite_16.json')
+   .add('spritesheet17','data/sprite_17.json')
+   .load(onAssetsLoaded);
+
+   // loader.on('progress', function (loader, loadedResource) {
+   //  console.log('Progress:', loader.progress + '%');});
+
+   loader.onComplete.add(() => { app.start(); } );
+
+  function onAssetsLoaded(loader, resources)
+  {
+      // create an array to store the textures
+      var objectTextures = [],
+      i, j;
+
+      for (i = 0; i < 288; i++)
+      {
+      	var texture = PIXI.Texture.fromFrame('square_' + i + '.png');
+      	objectTextures.push(texture);
+      }
+
+      // console.log(objectTextures);
+      var objecter = new PIXI.extras.AnimatedSprite(objectTextures);
+      container.addChild(objecter);
+      app.renderer.backgroundColor = 0xFFFFFF;
+      app.renderer.autoResize = true;
+      app.renderer.resize(window.innerWidth, window.innerHeight);
+      container.width = texture.orig.width;
+      container.height = texture.orig.height;
+      container.x = app.renderer.width / 2;
+      container.y = app.renderer.height / 2;
+      objecter.loop = false;
+
+      objecter.onComplete = function()
+      {
+        if(myAnimationOrder == 1)
+        {
+          objecter.animationSpeed = -0.5;
+          objecter.gotoAndPlay(287);
+          myAnimationOrder = 0;
+        }
+        else
+        {
+          objecter.animationSpeed = 0.5;
+          objecter.gotoAndPlay(1);
+          myAnimationOrder = 1;
+        }
+      };
+
+      objecter.anchor.set(0.5);
+      objecter.animationSpeed = 0.5;
+      objecter.interactive = true;
+
+      var imgWidth = texture.orig.width;
+      var imgHeight = texture.orig.height;
+
+      var sprite_width = 4096;
+      var sprite_height = 3072;
+
+      var steps_y = 11;
+      var steps_x = 23;
+
+      var touchxEnd = 0;
+      var touchyEnd = 0;
+
+      var touchxStart = 0;
+      var touchyStart = 0;
+
+  function updateDisplay(myX, myY, currentFrame)
+  {
+      // console.log('current frame: '+ currentFrame)
+
+      total_events_sprite = 16;
+      total_images = 289;
+      currentX = myX;
+      currentY = myY;
+
+      // console.log('CurrentX: ' + currentX + ' CurrentY: ' + currentY);
+
+      if (currentX >= 0 && currentX < 25)
+      {
+         if (currentY > 0 && currentY < 12)
+         {
+            objecter.rotation = 0;
+            frame = (currentX - 12) + (currentY * 24);
+          }
+        else
+        {
+          if (currentY > 12 && currentY < 23)
+          {
+             // 180 degrees = 3.14159265 radians
+             //objecter.rotation = 3.14159265;
+             objecter.rotation = Math.PI;
+             frame = -(currentX - 12) + (- currentY * 24);
+           }
+         }
+        objecter.gotoAndStop(frame);
+      }
+   }
+
+  objecter.touchend = function(touchData)
+  {
+    // console.log(touchData.type);
+    touchxEnd = touchData.data.originalEvent.clientX;
+    touchyEnd = touchData.data.originalEvent.clientY;
+    // console.log(Math.round(((touchxEnd/texture.orig.width)  * 23)));
+    // console.log(Math.round(((touchyEnd/texture.orig.height) * 22)));
+    //updateDisplay(currentX, currentY, objecter.currentFrame);
+  }
+
+  objecter.touchstart = function(touchData)
+  {
+    // console.log(touchData.type);
+    touchxStart = touchData.data.originalEvent.clientX;
+    touchyStart = touchData.data.originalEvent.clientY;
+    // console.log(Math.round(((touchxStart/texture.orig.width)  * 23)));
+    // console.log(Math.round(((touchyStart/texture.orig.height) * 22)));
+  }
+
+  objecter.touchmove = function(touchData)
+  {
+      // console.log(touchData.type);
+      // Relative coordinates to first screen touch
+      distxFromTouch = parseInt(touchData.data.originalEvent.clientX - touchxStart);
+      distyFromTouch = parseInt(touchData.data.originalEvent.clientY - touchyStart);
+
+      // Offset from left and top of the container
+      offsetTop = (document.getElementsByTagName("canvas")[0].height - container.height)/2;
+      offsetLeft = (document.getElementsByTagName("canvas")[0].width - container.width)/2;
+
+      // Mouse position
+      if (touchxEnd == 0 && touchyEnd == 0)
+      {
+        mouseX =  touchData.data.originalEvent.clientX - offsetLeft;
+        mouseY =  touchData.data.originalEvent.clientY - offsetTop;
+      }
+      else
+      {
+        mouseX =  touchxEnd - offsetLeft + (touchData.data.originalEvent.clientX - touchxStart);
+        mouseY =  touchyEnd - offsetTop + (touchData.data.originalEvent.clientY - touchyStart);
+      }
+      currentX = Math.round((mouseX/texture.orig.width) * 23);
+      currentY = Math.round((mouseY/texture.orig.height) * 22);
+
+      // Get current frame
+      MyCurrentFrame = objecter.currentFrame;
+
+      // Update display
+      updateDisplay(currentX, currentY, MyCurrentFrame);
+    }
+}
+
+
+})();
+</script>
+
+</body>
+</html>
