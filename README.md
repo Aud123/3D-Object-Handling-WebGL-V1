@@ -4,9 +4,9 @@
 ## Description
 This project allows the handle of object in 3D motion using a tablet or mobile phone. This is the beginning of what I wish to become a share project. The square object used here has been generated using Blender. Sprites were done with imageMagik.
 Tasks remaining:
-> Improve object / bring cool objects to project
-> Improve layout algorithm
-> Improve calculation algorithm
+ 1 Improve object / bring cool objects to project
+ 2 Improve layout algorithm
+ 3 Improve calculation algorithm
 
 ## Infrastructure
 ## Start
