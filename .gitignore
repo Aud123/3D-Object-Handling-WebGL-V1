@@ -1,1 +1,2 @@
-fill up as required
+# ignore .DS_Store file
+.DS_Store
