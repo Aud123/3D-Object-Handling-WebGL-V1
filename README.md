@@ -1,4 +1,4 @@
-# Handling of objects using WebGL (PIXI lib):
+# Object handling / visualization  using WebGL (PIXI lib):
 projet réalisé avec: [PIXI.js lib](https://github.com/pixijs/pixi.js/releases/tag/v4.5.1)
 
 ## Description
