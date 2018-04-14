@@ -10,6 +10,7 @@ Tasks remaining:
  - Improve object / bring cool objects to project
  - Improve layout algorithm
  - Improve calculation algorithm
+ - Comment code
  - other?
 
 ## Infrastructure
